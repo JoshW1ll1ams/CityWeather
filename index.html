@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en-gb">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <link rel="stylesheet" href="assets/styles.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+  <title>Weather Dashboard</title>
+</head>
+
+<body>
+  <header class="container-fluid text-center text-white bg-dark p-2 weather-header">
+    <h1>Weather Dashboard</h1>
+  </header>
+
+  <!-- max-width for ultra wide resolutions -->
+  <div class="griddisplay">
+      <div class="buttons">
+        <h2 id="form-heading" class="mt-1 h3 form-label">
+          Search for a City:
+        </h2>
+        <form id="search-form" class="form">
+          <div class="form-inline form-group">
+            <div class="input-group">
+              <input class="form-input weather-search" type="text" id="search-input" placeholder="London"
+                aria-labelledby="form-heading" aria-controls="today forecast" />
+            </div>
+          </div>
+        </form>
+
+        <div class="buttonlist">
+        <button type="submit" class="btn search-button" id="search-button" aria-label="submit search">
+          Search
+        </button>
+        <button class="btn search-button" id="history-button" aria-label="submit search">
+          Search
+        </button>
+        <button class="btn search-button" id="history-button" aria-label="submit search">
+          Search
+        </button>
+        <button class="btn search-button" id="history-button" aria-label="submit search">
+          Search
+        </button>
+      </div>
+        <div class="list-group" id="history"></div>
+    </div>
+
+    <div class="weather">
+        <section id="today" role="region" aria-live="polite">
+          <div id="currentinfo">
+          <h3>London</h3>
+          <p>Temp</p>
+          <p>Temp</p>
+          <p>Temp</p>
+        </div>
+          <section id="forecast" class="" role="region" aria-live="polite"></section>
+        </section>
+      </div>
+    </div>
+
+
+  <!-- Moment.js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
+  <!-- jQuery -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="assets/script.js"></script>
+</body>
+
+</html>

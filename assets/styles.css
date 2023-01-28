@@ -1,0 +1,53 @@
+.forecastdiv
+{
+    background-color: rgb(53, 52, 59);
+    margin: 10px;
+}
+p 
+{
+ margin-left: 10px;
+ color: aliceblue;
+}
+h3 
+{
+ margin-left: 10px;
+ color: aliceblue;
+}
+.griddisplay
+{
+    display: grid;
+}
+
+
+#forecast
+{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#currentinfo
+{
+    background-color: rgb(53, 52, 59);
+    border-style: solid;
+    border-width: 2px;
+}
+
+.buttonlist
+{
+    display: flex;
+    flex-direction: column;
+}
+
+#search-button
+{
+    background-color: rgb(47, 41, 178);
+}
+#history-button
+{
+    background-color: rgb(92, 110, 168);
+}
+#today
+{
+    margin-left: 20px;
+}
