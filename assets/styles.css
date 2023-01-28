@@ -3,34 +3,69 @@
     background-color: rgb(53, 52, 59);
     margin: 10px;
 }
-p 
+#today
+{
+    margin-top: 20px;
+    margin-right: 10px;
+}
+#today p{
+    margin-left: 10px;
+}
+#today h3{
+    margin-left: 10px;
+}
+
+#forecast p 
 {
  margin-left: 10px;
  color: aliceblue;
 }
-h3 
+#forecast h3 
 {
  margin-left: 10px;
  color: aliceblue;
 }
+
 .griddisplay
 {
     display: grid;
+    grid-template-columns: 0.5fr 2fr;
+    grid-template-areas: 
+    "buttons weather weather"
+    ;
+}
+.buttonlist{
+    grid-area: buttonlist;
+}
+.weather{
+    grid-area: weather;
 }
 
-
+.form-input
+{
+    width: 90%;
+    margin-left: 5%;
+}
+#form-heading
+{
+    margin-left: 2%;
+}
 #forecast
 {
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
+.forecastdiv
+{
+    width: 20%;
+}
 
 #currentinfo
 {
-    background-color: rgb(53, 52, 59);
     border-style: solid;
     border-width: 2px;
+    margin-left: 10px;
 }
 
 .buttonlist
@@ -42,10 +77,12 @@ h3
 #search-button
 {
     background-color: rgb(47, 41, 178);
+    margin: 10px;
 }
 #history-button
 {
     background-color: rgb(92, 110, 168);
+    margin: 10px;
 }
 #today
 {
