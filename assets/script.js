@@ -7,45 +7,96 @@ var currentwind = $("#currentwind");
 var currenthumid = $("#currenthumid");
 var buttonlist = $(".buttonlist");
 
-
-
 var today = moment().format("GGGG-MM-DD");
 var todayDay = parseInt(moment().format("DD"))+1;
-
 
 var city;
 var lat;
 var lon;
 var counter;
-// var count = localStorage.getItem("counter")
+
 
 $("#search-button").on("click", function() {
 city = input.val();
-run()
-var HistoryButton = $('<button>');
-HistoryButton.addClass("btn search-button")
-HistoryButton.attr('id', 'history-button');
-HistoryButton.attr('data-id', input.val());
-HistoryButton.text(city)
-buttonlist.append(HistoryButton)
-localStorage.setItem(count,document.getElementById("history-button").outerHTML)
-localStorage.setItem("counter",count+1)
+run();
+if(input.val() != "")
+{
+    var HistoryButton = $('<button>');
+    HistoryButton.addClass("btn search-button");
+    HistoryButton.attr('id', 'history-button');
+    HistoryButton.attr('data-id', input.val());
+    HistoryButton.text(city);
+    buttonlist.append(HistoryButton);
+
+    var currentlyStored = $(".buttonlist").children().length
+    //console.log(document.getElementById("history-button").outerHTML)
+     if(currentlyStored == 2)
+     {
+        console.log("saved")
+        var temp = $('.buttonlist').children().eq(1).prop('outerHTML')
+        localStorage.setItem(1,temp);
+     }
+     if(currentlyStored == 3)
+     {
+        var temp = $('.buttonlist').children().eq(2).prop('outerHTML')
+        localStorage.setItem(2,temp);
+     }
+     if(currentlyStored == 4)
+     {
+        var temp = $('.buttonlist').children().eq(3).prop('outerHTML')
+        localStorage.setItem(3,temp);
+     }
+     if(currentlyStored == 5)
+     {
+        var temp = $('.buttonlist').children().eq(4).prop('outerHTML')
+        localStorage.setItem(4,temp);
+     }
+     if(currentlyStored == 6)
+     {
+        var temp = $('.buttonlist').children().eq(5).prop('outerHTML')
+        localStorage.setItem(5,temp);
+     }
+     if(currentlyStored == 7)
+     {
+        var temp = $('.buttonlist').children().eq(6).prop('outerHTML')
+        localStorage.setItem(6,temp);
+     }
+     if(currentlyStored == 8)
+     {
+        var temp = $('.buttonlist').children().eq(7).prop('outerHTML')
+        localStorage.setItem(7,temp);
+     }
+     if(currentlyStored == 9)
+     {
+        var temp = $('.buttonlist').children().eq(8).prop('outerHTML')
+        localStorage.setItem(8,temp);
+     }
+     if(currentlyStored == 10)
+     {
+        var temp = $('.buttonlist').children().eq(9).prop('outerHTML')
+        localStorage.setItem(9,temp);
+     }
+     if(currentlyStored == 11)
+     {
+        var temp = $('.buttonlist').children().eq(10).prop('outerHTML')
+        localStorage.setItem(10,temp);
+     }
+
+}
 });
-localStorage.clear();
-// for(var i = 0; i < count; i++)
-// {
-//     console.log(count)
-//     var thisSaved = localStorage.getItem(i)
-//     var button = $(thisSaved);
-//     buttonlist.append(button)
-// }
+
+var stored = [localStorage.getItem(1),localStorage.getItem(2),localStorage.getItem(3),localStorage.getItem(4),localStorage.getItem(5),localStorage.getItem(6),localStorage.getItem(7),localStorage.getItem(8),localStorage.getItem(9),localStorage.getItem(10)]
+for(var i=0; i<stored.length; i++)
+{
+    var HistoryButton = $(stored[i]);
+    buttonlist.append(HistoryButton);
+}
 
 
 $(document.body).on('click', '#history-button' ,function(){
      city = $(this).data().id;
-     run()
+     run();
 });
-
 
 
 function run()
@@ -63,12 +114,11 @@ $.ajax({
         url: queryUrlWeather,
         method: "GET"
     }).then(function(response) {
-        console.log(response)
         for(var i =0; i<response.list.length;i++)
             {
-                var date = response.list[i].dt_txt
-                var dayarr = date.split("-")
-                var day = dayarr[2].charAt(0)+dayarr[2].charAt(1)
+                var date = response.list[i].dt_txt;
+                var dayarr = date.split("-");
+                var day = dayarr[2].charAt(0)+dayarr[2].charAt(1);
                 
                 if(day.includes(todayDay))
                     {
@@ -76,10 +126,10 @@ $.ajax({
                         break;
                     }
             }
-            currentcity.text(response.city.name)
-            currenttemp.text("Temp: "+response.list[0].main.temp+"°C")
-            currentwind.text("Wind Speed: "+response.list[0].wind.speed)
-            currenthumid.text("Humidity: "+response.list[0].main.humidity)
+            currentcity.text(response.city.name);
+            currenttemp.text("Temp: "+response.list[0].main.temp+"°C");
+            currentwind.text("Wind Speed: "+response.list[0].wind.speed);
+            currenthumid.text("Humidity: "+response.list[0].main.humidity);
 
             var addition = 0;
             forecast.empty();
@@ -98,6 +148,7 @@ $.ajax({
                 wind.text("Wind Speed: "+response.list[counter+addition].wind.speed);
                 humidity.text("Humidity: "+response.list[counter+addition].main.humidity);
             
+                $(icon).attr("src","http://openweathermap.org/img/wn/"+response.list[counter+addition].weather[0].icon+"@2x.png");
                 forecastdiv.addClass("forecastdiv")
             
                 forecastdiv.append(header);
