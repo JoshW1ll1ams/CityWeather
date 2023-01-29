@@ -101,14 +101,14 @@ $(document.body).on('click', '#history-button' ,function(){
 
 function run()
 {  
-var queryUrlGeocode = "http://api.openweathermap.org/geo/1.0/direct?q="+city+"&limit=1&appid="+apiKey;
+var queryUrlGeocode = "https://api.openweathermap.org/geo/1.0/direct?q="+city+"&limit=1&appid="+apiKey;
 $.ajax({
   url: queryUrlGeocode,
   method: "GET"
 }).then(function(response) {
     var lat = response[0].lat;
     var lon = response[0].lon;
-    var queryUrlWeather = "http://api.openweathermap.org/data/2.5/forecast?lat="+lat+"&lon="+lon+"&appid="+apiKey+"&units=metric";
+    var queryUrlWeather = "https://api.openweathermap.org/data/2.5/forecast?lat="+lat+"&lon="+lon+"&appid="+apiKey+"&units=metric";
 
     $.ajax({
         url: queryUrlWeather,
