@@ -98,6 +98,12 @@ $(document.body).on('click', '#history-button' ,function(){
      run();
 });
 
+$('#clear-button').on('click',function(){
+    localStorage.clear();
+    location.reload();
+});
+
+
 
 function run()
 {  

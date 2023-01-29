@@ -68,6 +68,13 @@
     flex-direction: column;
 }
 
+#clear-button
+{
+    background-color: rgb(136, 68, 104);
+    margin: 10px;
+    width: 95%;
+}
+
 #search-button
 {
     background-color: rgb(47, 41, 178);
