@@ -5,6 +5,7 @@ var currentcity = $("#currentcity");
 var currenttemp = $("#currenttemp");
 var currentwind = $("#currentwind");
 var currenthumid = $("#currenthumid");
+var buttonlist = $(".buttonlist");
 
 
 
@@ -16,9 +17,39 @@ var city;
 var lat;
 var lon;
 var counter;
+// var count = localStorage.getItem("counter")
 
 $("#search-button").on("click", function() {
 city = input.val();
+run()
+var HistoryButton = $('<button>');
+HistoryButton.addClass("btn search-button")
+HistoryButton.attr('id', 'history-button');
+HistoryButton.attr('data-id', input.val());
+HistoryButton.text(city)
+buttonlist.append(HistoryButton)
+localStorage.setItem(count,document.getElementById("history-button").outerHTML)
+localStorage.setItem("counter",count+1)
+});
+localStorage.clear();
+// for(var i = 0; i < count; i++)
+// {
+//     console.log(count)
+//     var thisSaved = localStorage.getItem(i)
+//     var button = $(thisSaved);
+//     buttonlist.append(button)
+// }
+
+
+$(document.body).on('click', '#history-button' ,function(){
+     city = $(this).data().id;
+     run()
+});
+
+
+
+function run()
+{  
 var queryUrlGeocode = "http://api.openweathermap.org/geo/1.0/direct?q="+city+"&limit=1&appid="+apiKey;
 $.ajax({
   url: queryUrlGeocode,
@@ -26,7 +57,7 @@ $.ajax({
 }).then(function(response) {
     var lat = response[0].lat;
     var lon = response[0].lon;
-    var queryUrlWeather = "http://api.openweathermap.org/data/2.5/forecast?lat="+lat+"&lon="+lon+"&appid="+apiKey;
+    var queryUrlWeather = "http://api.openweathermap.org/data/2.5/forecast?lat="+lat+"&lon="+lon+"&appid="+apiKey+"&units=metric";
 
     $.ajax({
         url: queryUrlWeather,
@@ -46,14 +77,14 @@ $.ajax({
                     }
             }
             currentcity.text(response.city.name)
-            currenttemp.text("Temp: "+response.list[0].main.temp)
+            currenttemp.text("Temp: "+response.list[0].main.temp+"°C")
             currentwind.text("Wind Speed: "+response.list[0].wind.speed)
             currenthumid.text("Humidity: "+response.list[0].main.humidity)
 
             var addition = 0;
+            forecast.empty();
             for(var i =0; i<5;i++)
             {
-                
                 var forecastdiv = $('<div>');
                 var header = $('<h3>');
                 var icon = $('<img>');
@@ -61,8 +92,9 @@ $.ajax({
                 var wind = $('<p>');
                 var humidity = $('<p>');
                 
-                header.text(response.list[counter+addition].dt_txt);
-                temp.text("Temp: "+response.list[counter+addition].main.temp);
+                var forecastDate = response.list[counter+addition].dt_txt.slice(5,10)
+                header.text(forecastDate);
+                temp.text("Temp: "+response.list[counter+addition].main.temp+"°C");
                 wind.text("Wind Speed: "+response.list[counter+addition].wind.speed);
                 humidity.text("Humidity: "+response.list[counter+addition].main.humidity);
             
@@ -79,11 +111,6 @@ $.ajax({
             }
     });
     });
-});
-
-
-
-
-
+}
 
 
