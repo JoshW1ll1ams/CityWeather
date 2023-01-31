@@ -1,4 +1,4 @@
-var apiKey = "880c668a67c5fcb81fdb410e76fe8763";
+var apiKey = "294d8b64be1fb708429a60b0e59477b5";
 var forecast = $("#forecast");
 var input = $(".form-input");
 var currentcity = $("#currentcity");
@@ -115,7 +115,6 @@ $.ajax({
     var lat = response[0].lat;
     var lon = response[0].lon;
     var queryUrlWeather = "https://api.openweathermap.org/data/2.5/forecast?lat="+lat+"&lon="+lon+"&appid="+apiKey+"&units=metric";
-
     $.ajax({
         url: queryUrlWeather,
         method: "GET"
@@ -139,7 +138,7 @@ $.ajax({
 
             var addition = 0;
             forecast.empty();
-            for(var i =0; i<5;i++)
+            for(var i =0; i<2;i++)
             {
                 var forecastdiv = $('<div>');
                 var header = $('<h3>');
