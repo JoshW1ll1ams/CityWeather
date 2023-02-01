@@ -7,14 +7,13 @@ var currentwind = $("#currentwind");
 var currenthumid = $("#currenthumid");
 var buttonlist = $(".buttonlist");
 
-var today = moment().format("GGGG-MM-DD");
-var todayDay = parseInt(moment().format("DD"))+1;
+
 
 var city;
 var lat;
 var lon;
-var counter;
 
+var counter;
 
 $("#search-button").on("click", function() {
 city = input.val();
@@ -29,7 +28,7 @@ if(input.val() != "")
     buttonlist.append(HistoryButton);
 
     var currentlyStored = $(".buttonlist").children().length
-    //console.log(document.getElementById("history-button").outerHTML)
+
      if(currentlyStored == 2)
      {
         console.log("saved")
@@ -119,34 +118,45 @@ $.ajax({
         url: queryUrlWeather,
         method: "GET"
     }).then(function(response) {
-        for(var i =0; i<response.list.length;i++)
+
+         
+            var today = moment().format("GGGG-MM-DD");
+            var todayDay = parseInt(moment().format("DD"));
+
+            
+
+           
+
+            for(var i =0; i<response.list.length;i++)
             {
                 var date = response.list[i].dt_txt;
-                var dayarr = date.split("-");
-                var day = dayarr[2].charAt(0)+dayarr[2].charAt(1);
-                
-                if(day.includes(todayDay))
-                    {
-                        var counter = i;
-                        break;
-                    }
+                var time = date.slice(11,13)
+                if(time == "00")
+                {
+                  counter = i;
+                  break
+                }
+           
             }
+
             currentcity.text(response.city.name);
             currenttemp.text("Temp: "+response.list[0].main.temp+"°C");
             currentwind.text("Wind Speed: "+response.list[0].wind.speed);
             currenthumid.text("Humidity: "+response.list[0].main.humidity);
 
-            var addition = 0;
+            
             forecast.empty();
-            for(var i =0; i<2;i++)
+            var addition = 0;
+     
+            for(var i =0; i<5;i++)
             {
+         
                 var forecastdiv = $('<div>');
                 var header = $('<h3>');
                 var icon = $('<img>');
                 var temp = $('<p>');
                 var wind = $('<p>');
                 var humidity = $('<p>');
-                
                 var forecastDate = response.list[counter+addition].dt_txt.slice(5,10)
                 header.text(forecastDate);
                 temp.text("Temp: "+response.list[counter+addition].main.temp+"°C");
